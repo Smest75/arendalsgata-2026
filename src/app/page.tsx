@@ -1,65 +1,197 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { db } from '@/db'
+import { events } from '@/db/schema'
+import { eq } from 'drizzle-orm'
+import EventCard from '@/components/EventCard'
 
-export default function Home() {
+const AKTORER = [
+  { name: 'Sagene bokhandel', type: 'Bokhandel & kultursted' },
+  { name: 'Rivertz', type: 'Vinbar' },
+  { name: 'Mellomrommet', type: 'Galleri & lokale' },
+  { name: 'Gullsmeden', type: 'Butikk & fageksperter' },
+]
+
+export default async function Home() {
+  const publishedEvents = await db
+    .select()
+    .from(events)
+    .where(eq(events.status, 'published'))
+    .orderBy(events.finalDate)
+    .limit(6)
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Hero */}
+      <section className="bg-green text-cream px-4 sm:px-6 py-20 sm:py-32">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-3xl">
+            <h1 className="font-display font-bold text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-none mb-4">
+              Arendals&shy;gata
+              <span className="text-rust block sm:inline sm:ml-4">2026</span>
+            </h1>
+            <p className="text-xl sm:text-2xl font-display font-semibold text-cream/90 mt-6 mb-4 leading-snug">
+              Festivalen for deg som blir igjen i Trygge Oslo
+            </p>
+            <p className="text-cream/70 text-base sm:text-lg mb-2">
+              10.–14. august · Sagene, Oslo
+            </p>
+            <p className="text-cream/80 text-base sm:text-lg max-w-2xl leading-relaxed mt-4 mb-10">
+              Når politikere, medier og påvirkere samles i Arendal, lager vi vår egen møteplass i
+              Arendalsgata. Fag, kultur, mat, teknologi, litteratur, musikk og gode samtaler —
+              bygget nedenfra, med lokale aktører og ildsjeler.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/program"
+                className="bg-cream text-green font-semibold px-6 py-3 rounded text-center hover:bg-cream/90 transition-colors"
+              >
+                Se program
+              </Link>
+              <Link
+                href="/bli-med#arrangement"
+                className="bg-rust text-cream font-semibold px-6 py-3 rounded text-center hover:bg-rust-light transition-colors"
+              >
+                Meld inn arrangement
+              </Link>
+              <Link
+                href="/bli-med"
+                className="border border-cream/40 text-cream font-semibold px-6 py-3 rounded text-center hover:border-cream/70 transition-colors"
+              >
+                Bli med
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hva er dette */}
+      <section className="bg-cream border-b border-border px-4 sm:px-6 py-16">
+        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-dark mb-6 leading-tight">
+              En festival i én gate.<br />For folk fra hele byen.
+            </h2>
+            <p className="text-dark/70 leading-relaxed mb-4">
+              Arendalsgata 2026 startet som en liten spøk ved busstoppet Arendalsgata. Men kanskje
+              det finnes en større idé her: Må alt spennende skje et annet sted? Eller kan vi lage
+              noe her, med folkene, stedene og miljøene som allerede finnes i nabolaget?
+            </p>
+            <p className="text-dark/70 leading-relaxed">
+              Det kan være en samtale i en bokhandel. En vinsmaking. En faglig frokost. En liten
+              konsert. En quizkveld. En utstilling. En workshop. Et foredrag. En middag. Eller noe
+              vi ikke har tenkt på ennå.
+            </p>
+          </div>
+          <div className="bg-white border border-border rounded-sm p-8">
+            <p className="font-display font-bold text-2xl text-green mb-2 leading-snug">
+              &ldquo;Laget i Arendalsgata. Åpent for hele Oslo.&rdquo;
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="font-bold text-dark text-2xl font-display">5 dager</p>
+                <p className="text-dark/60">10.–14. august</p>
+              </div>
+              <div>
+                <p className="font-bold text-dark text-2xl font-display">Sagene</p>
+                <p className="text-dark/60">Oslo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Aktører */}
+      <section className="bg-white border-b border-border px-4 sm:px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-display font-bold text-2xl text-dark mb-2">
+            Foreløpige aktører
+          </h2>
+          <p className="text-dark/60 text-sm mb-8">
+            Disse er i dialog om å delta på et eller annet vis.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {AKTORER.map((a) => (
+              <div key={a.name} className="border border-border rounded-sm p-4">
+                <p className="font-display font-semibold text-dark text-lg">{a.name}</p>
+                <p className="text-dark/50 text-sm mt-1">{a.type}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-dark/50 text-sm mt-6">
+            Har du et sted, en idé eller lyst til å bidra?{' '}
+            <Link href="/bli-med" className="text-green font-medium hover:underline">
+              Meld deg på →
+            </Link>
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Program */}
+      <section className="bg-cream px-4 sm:px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <h2 className="font-display font-bold text-2xl text-dark">Program</h2>
+              <p className="text-dark/60 text-sm mt-1">Fylles fortløpende</p>
+            </div>
+            <Link href="/program" className="text-sm font-medium text-green hover:underline">
+              Se alle arrangementer →
+            </Link>
+          </div>
+
+          {publishedEvents.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {publishedEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="border border-border rounded-sm bg-white p-12 text-center">
+              <p className="font-display font-bold text-xl text-dark/40 mb-2">
+                Programmet er under bygging
+              </p>
+              <p className="text-dark/40 text-sm">
+                De første arrangementene publiseres snart.
+              </p>
+            </div>
+          )}
         </div>
-      </main>
-    </div>
-  );
+      </section>
+
+      {/* Bli med CTA */}
+      <section className="bg-green text-cream px-4 sm:px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl mb-4 leading-tight">
+            Har du en idé, et lokale<br />eller lyst til å bidra?
+          </h2>
+          <p className="text-cream/80 mb-10 max-w-xl leading-relaxed">
+            Du trenger ikke ha alt klart. Send inn det du har, så tar vi kontakt.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link
+              href="/bli-med#arrangement"
+              className="bg-white text-green p-6 rounded-sm hover:bg-cream transition-colors block"
+            >
+              <p className="font-display font-bold text-lg mb-1">Jeg vil arrangere noe</p>
+              <p className="text-green/70 text-sm">Foredrag, konsert, workshop, samtale, quiz...</p>
+            </Link>
+            <Link
+              href="/bli-med#lokale"
+              className="bg-white text-green p-6 rounded-sm hover:bg-cream transition-colors block"
+            >
+              <p className="font-display font-bold text-lg mb-1">Jeg har et lokale</p>
+              <p className="text-green/70 text-sm">Butikk, serveringssted, galleri, bakgård...</p>
+            </Link>
+            <Link
+              href="/bli-med#interesse"
+              className="bg-white text-green p-6 rounded-sm hover:bg-cream transition-colors block"
+            >
+              <p className="font-display font-bold text-lg mb-1">Jeg vil bidra</p>
+              <p className="text-green/70 text-sm">Frivillig, fagperson, samarbeidspartner...</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  )
 }

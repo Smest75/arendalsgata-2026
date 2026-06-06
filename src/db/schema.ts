@@ -1,0 +1,56 @@
+import { pgTable, text, timestamp, integer } from 'drizzle-orm/pg-core'
+
+export const events = pgTable('events', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  slug: text().notNull().unique(),
+  title: text().notNull(),
+  description: text().notNull(),
+  descriptionEdited: text(),
+  organizer: text().notNull(),
+  contactName: text().notNull(),
+  email: text().notNull(),
+  phone: text(),
+  hasVenue: text().notNull(),
+  preferredTime: text().notNull(),
+  categories: text().array().notNull().default([]),
+  helpNeeded: text().array().notNull().default([]),
+  canPublish: text().notNull(),
+  status: text().notNull().default('new'),
+  finalDate: text(),
+  finalStartTime: text(),
+  finalEndTime: text(),
+  finalVenue: text(),
+  isFree: text(),
+  registrationUrl: text(),
+  internalNotes: text(),
+  createdAt: timestamp().defaultNow().notNull(),
+})
+
+export const venues = pgTable('venues', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: text().notNull(),
+  address: text().notNull(),
+  type: text().notNull(),
+  description: text().notNull(),
+  capacity: text().notNull(),
+  availability: text().notNull(),
+  canOthersArrange: text().notNull(),
+  contactName: text().notNull(),
+  email: text().notNull(),
+  phone: text(),
+  status: text().notNull().default('new'),
+  internalNotes: text(),
+  createdAt: timestamp().defaultNow().notNull(),
+})
+
+export const interests = pgTable('interests', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: text().notNull(),
+  email: text().notNull(),
+  personType: text().notNull(),
+  interests: text().array().notNull().default([]),
+  message: text(),
+  status: text().notNull().default('new'),
+  internalNotes: text(),
+  createdAt: timestamp().defaultNow().notNull(),
+})
