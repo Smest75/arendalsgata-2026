@@ -4,6 +4,8 @@ import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Program — Arendalsgata 2026',
 }
