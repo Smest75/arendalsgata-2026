@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events, venues, interests } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
@@ -34,6 +34,7 @@ export async function logout() {
 }
 
 export async function updateEventStatus(id: number, status: string) {
+  const db = await getDb()
   await db.update(events).set({ status }).where(eq(events.id, id))
   revalidatePath('/admin')
   revalidatePath('/program')
@@ -41,11 +42,13 @@ export async function updateEventStatus(id: number, status: string) {
 }
 
 export async function updateVenueStatus(id: number, status: string) {
+  const db = await getDb()
   await db.update(venues).set({ status }).where(eq(venues.id, id))
   revalidatePath('/admin')
 }
 
 export async function updateInterestStatus(id: number, status: string) {
+  const db = await getDb()
   await db.update(interests).set({ status }).where(eq(interests.id, id))
   revalidatePath('/admin')
 }

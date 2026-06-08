@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import Link from 'next/link'
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
@@ -14,6 +14,7 @@ const AKTORER = [
 ]
 
 export default async function Home() {
+  const db = await getDb()
   const publishedEvents = await db
     .select()
     .from(events)

@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
@@ -11,6 +11,7 @@ export const metadata = {
 }
 
 export default async function ProgramPage() {
+  const db = await getDb()
   const publishedEvents = await db
     .select()
     .from(events)

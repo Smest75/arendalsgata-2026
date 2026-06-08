@@ -1,6 +1,6 @@
 'use server'
 
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events, venues, interests } from '@/db/schema'
 import { generateSlug } from '@/lib/utils'
 import { sendEventNotification, sendVenueNotification, sendInterestNotification } from '@/lib/email'
@@ -25,6 +25,7 @@ export async function submitEvent(_prev: ActionState, formData: FormData): Promi
   }
 
   try {
+    const db = await getDb()
     const slug = generateSlug(title)
     await db.insert(events).values({
       slug,
@@ -47,7 +48,8 @@ export async function submitEvent(_prev: ActionState, formData: FormData): Promi
     } catch {}
 
     return { success: true }
-  } catch {
+  } catch (e) {
+    console.error('submitEvent error:', e)
     return { error: 'Noe gikk galt. Prøv igjen.' }
   }
 }
@@ -69,6 +71,7 @@ export async function submitVenue(_prev: ActionState, formData: FormData): Promi
   }
 
   try {
+    const db = await getDb()
     await db.insert(venues).values({
       name,
       address,
@@ -88,7 +91,8 @@ export async function submitVenue(_prev: ActionState, formData: FormData): Promi
     } catch {}
 
     return { success: true }
-  } catch {
+  } catch (e) {
+    console.error('submitVenue error:', e)
     return { error: 'Noe gikk galt. Prøv igjen.' }
   }
 }
@@ -105,6 +109,7 @@ export async function submitInterest(_prev: ActionState, formData: FormData): Pr
   }
 
   try {
+    const db = await getDb()
     await db.insert(interests).values({
       name,
       email,
@@ -119,7 +124,8 @@ export async function submitInterest(_prev: ActionState, formData: FormData): Pr
     } catch {}
 
     return { success: true }
-  } catch {
+  } catch (e) {
+    console.error('submitInterest error:', e)
     return { error: 'Noe gikk galt. Prøv igjen.' }
   }
 }

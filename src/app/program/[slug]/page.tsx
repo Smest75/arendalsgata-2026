@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { notFound } from 'next/navigation'
@@ -7,6 +7,7 @@ import { categoryLabel, formatDate } from '@/lib/utils'
 
 export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  const db = await getDb()
   const [event] = await db.select().from(events).where(eq(events.slug, slug)).limit(1)
 
   if (!event || event.status !== 'published') notFound()

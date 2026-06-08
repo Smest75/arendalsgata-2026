@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic'
 
-import { db } from '@/db'
+import { getDb } from '@/db'
 import { events, venues, interests } from '@/db/schema'
 import { desc } from 'drizzle-orm'
 import { StatusSelect } from './StatusSelect'
@@ -28,6 +28,7 @@ function Table({ cols, children }: { cols: string[]; children: React.ReactNode }
 }
 
 export default async function AdminPage() {
+  const db = await getDb()
   const [allEvents, allVenues, allInterests] = await Promise.all([
     db.select().from(events).orderBy(desc(events.createdAt)),
     db.select().from(venues).orderBy(desc(venues.createdAt)),
