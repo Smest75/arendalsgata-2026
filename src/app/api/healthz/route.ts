@@ -1,7 +1,12 @@
 export async function GET() {
+  const ap = process.env.ADMIN_PASSWORD
   const checks: Record<string, unknown> = {
     DATABASE_URL: !!process.env.DATABASE_URL,
     RESEND_API_KEY: !!process.env.RESEND_API_KEY,
+    ADMIN_PASSWORD_set: !!ap,
+    ADMIN_PASSWORD_length: ap?.length ?? 0,
+    ADMIN_PASSWORD_trimmed_length: ap?.trim().length ?? 0,
+    ADMIN_PASSWORD_first3: ap ? ap.slice(0, 3) : null,
   }
 
   try {
