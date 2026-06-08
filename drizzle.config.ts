@@ -4,6 +4,7 @@ export default {
   schema: './src/db/schema.ts',
   out: './drizzle',
   dialect: 'postgresql',
+  // postgres.js-driveren brukes nå i appen
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
