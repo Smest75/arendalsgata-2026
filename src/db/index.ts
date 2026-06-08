@@ -11,7 +11,6 @@ export async function getDb() {
 async function createDb() {
   const { default: postgres } = await import('postgres')
   const { drizzle } = await import('drizzle-orm/postgres-js')
-  const schema = await import('./schema')
 
   const client = postgres(process.env.DATABASE_URL!, {
     max: 1,
@@ -20,5 +19,5 @@ async function createDb() {
     connect_timeout: 10,
   })
 
-  return drizzle(client, { schema })
+  return drizzle(client)
 }
