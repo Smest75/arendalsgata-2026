@@ -1,9 +1,11 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const FROM = 'Arendalsgata 2026 <noreply@arendalsgata.no>'
 const TO = 'hei@arendalsgata.no'
+
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY ?? '')
+}
 
 export async function sendEventNotification(data: {
   title: string
@@ -11,7 +13,7 @@ export async function sendEventNotification(data: {
   email: string
   preferredTime: string
 }) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM,
     to: TO,
     subject: `Nytt arrangement: ${data.title}`,
@@ -32,7 +34,7 @@ export async function sendVenueNotification(data: {
   contactName: string
   email: string
 }) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM,
     to: TO,
     subject: `Nytt lokale: ${data.name}`,
@@ -51,7 +53,7 @@ export async function sendInterestNotification(data: {
   email: string
   personType: string
 }) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM,
     to: TO,
     subject: `Ny interessemelding fra ${data.name}`,
