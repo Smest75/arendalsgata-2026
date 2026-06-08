@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const ap = process.env.ADMIN_PASSWORD
   const checks: Record<string, unknown> = {
