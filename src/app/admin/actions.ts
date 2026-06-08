@@ -8,15 +8,15 @@ import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 export async function login(_prev: unknown, formData: FormData) {
-  const password = formData.get('password') as string
-  const adminPassword = process.env.ADMIN_PASSWORD
+  const password = (formData.get('password') as string)?.trim()
+  const adminPassword = process.env.ADMIN_PASSWORD?.trim()
 
   if (!adminPassword || password !== adminPassword) {
     return { error: 'Feil passord.' }
   }
 
   const cookieStore = await cookies()
-  cookieStore.set('admin-session', adminPassword, {
+  cookieStore.set('admin-session', adminPassword!, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

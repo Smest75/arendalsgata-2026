@@ -7,8 +7,8 @@ export function proxy(request: NextRequest) {
 
   if (isAdminPath && !isLoginPath) {
     const session = request.cookies.get('admin-session')
-    const validPassword = process.env.ADMIN_PASSWORD
-    if (!session || !validPassword || session.value !== validPassword) {
+    const validPassword = process.env.ADMIN_PASSWORD?.trim()
+    if (!session || !validPassword || session.value.trim() !== validPassword) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
