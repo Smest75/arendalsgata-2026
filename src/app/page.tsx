@@ -74,14 +74,13 @@ export default async function Home() {
               En festival i én gate.<br />For folk fra hele byen.
             </h2>
             <p className="text-dark/70 leading-relaxed mb-4">
-              Arendalsgata 2026 startet som en liten spøk ved busstoppet Arendalsgata. Men kanskje
-              det finnes en større idé her: Må alt spennende skje et annet sted? Eller kan vi lage
+              Arendalsgata 2026 startet som en liten spøk om mingling ved busstoppet Arendalsgata.
+			  Men den traff en nerve: Hva med oss som blir igjen i byen? Kan vi lage
               noe her, med folkene, stedene og miljøene som allerede finnes i nabolaget?
             </p>
             <p className="text-dark/70 leading-relaxed">
               Det kan være en samtale i en bokhandel. En vinsmaking. En faglig frokost. En liten
-              intimkonsert. En quizkveld. En utstilling. En workshop. Et foredrag. En middag. Eller noe
-              vi ikke har tenkt på ennå.
+              intimkonsert. En quizkveld. En utstilling. En workshop. Synliggjøre lokale virksomheter. Et foredrag. En middag. Eller noe vi ikke har tenkt på ennå.
             </p>
           </div>
           <div className="bg-white border border-border rounded-sm p-8">

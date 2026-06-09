@@ -80,18 +80,37 @@ export default function OmPage() {
         </section>
 
         <section className="bg-white border border-border rounded-sm p-8">
-          <h2 className="font-display font-bold text-2xl text-dark mb-4">Hvem står bak?</h2>
-          <p className="text-dark/70 leading-relaxed mb-4">
-            Arendalsgata 2026 er initiert av Martin Smestad Hansen, som bor et steinkast fra
-            Arendalsgata. Festivalen bygges i samarbeid med lokale aktører, ildsjeler og
-            arrangører.
-          </p>
-          <p className="text-dark/70">
-            Kontakt:{' '}
-            <a href="mailto:hei@arendalsgata.no" className="text-green font-medium hover:underline">
-              hei@arendalsgata.no
-            </a>
-          </p>
+          <h2 className="font-display font-bold text-2xl text-dark mb-6">Hvem står bak?</h2>
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            <div className="flex-1">
+              <p className="text-dark/70 leading-relaxed mb-4">
+                Arendalsgata 2026 er initiert av Martin Smestad Hansen, som bor et steinkast fra
+                Arendalsgata. Festivalen bygges i samarbeid med lokale aktører, ildsjeler og
+                arrangører.
+              </p>
+              <p className="text-dark/70 leading-relaxed mb-6">
+                Det startet med en selfie ved busstoppet da Arendalsuka åpnet i august 2025.
+                LinkedIn-posten tok av — og ideen begynte å ta form.
+              </p>
+              <p className="text-dark/70">
+                Kontakt:{' '}
+                <a href="mailto:hei@arendalsgata.no" className="text-green font-medium hover:underline">
+                  hei@arendalsgata.no
+                </a>
+              </p>
+            </div>
+            <div className="shrink-0 w-full lg:w-auto">
+              <iframe
+                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7360565443155193857"
+                height="690"
+                width="504"
+                frameBorder="0"
+                allowFullScreen
+                title="LinkedIn-post som startet det hele"
+                className="max-w-full rounded-sm"
+              />
+            </div>
+          </div>
         </section>
 
         <div className="text-center">
