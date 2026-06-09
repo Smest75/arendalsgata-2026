@@ -1,7 +1,9 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Om festivalen — Arendalsgata 2026',
+  title: 'Om festivalen',
+  description: 'Hvem står bak Arendalsgata 2026, hvor det skjer og hvordan du kommer deg dit. Sagene, Oslo, 10.–14. august.',
+  alternates: { canonical: 'https://arendalsgata.no/om' },
 }
 
 export default function OmPage() {

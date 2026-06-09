@@ -1,7 +1,9 @@
 import { EventForm, VenueForm, InterestForm } from './forms'
 
 export const metadata = {
-  title: 'Bli med — Arendalsgata 2026',
+  title: 'Bli med',
+  description: 'Meld inn arrangement, registrer lokale eller meld interesse for Arendalsgata 2026. Du trenger ikke ha alt klart.',
+  alternates: { canonical: 'https://arendalsgata.no/bli-med' },
 }
 
 function Section({ id, title, sub, children }: {

@@ -8,7 +8,9 @@ import { categoryLabel, formatDateFull, ALL_CATEGORIES } from '@/lib/utils'
 export const revalidate = 60
 
 export const metadata = {
-  title: 'Program — Arendalsgata 2026',
+  title: 'Program',
+  description: 'Alle arrangementer under Arendalsgata 2026. Fag, kultur, mat, musikk og mye mer i Arendalsgata på Sagene, 10.–14. august.',
+  alternates: { canonical: 'https://arendalsgata.no/program' },
 }
 
 type Props = { searchParams: Promise<{ kategori?: string }> }

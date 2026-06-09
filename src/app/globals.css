@@ -16,3 +16,10 @@ body {
   background-color: #F4EEE0;
   color: #1A1A18;
 }
+
+/* WCAG 2.1 — synlig fokusindikator for tastaturnavigasjon */
+:focus-visible {
+  outline: 2px solid #2B4C35;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
