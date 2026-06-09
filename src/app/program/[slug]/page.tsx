@@ -52,21 +52,29 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             <p className="text-dark/80 leading-relaxed text-lg whitespace-pre-wrap">{desc}</p>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-border grid sm:grid-cols-3 gap-4 text-sm">
+          <div className="mt-8 pt-8 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
             <div>
               <p className="font-semibold text-dark/40 uppercase text-xs tracking-wider mb-1">Arrangør</p>
               <p className="text-dark">{event.organizer}</p>
             </div>
-            {event.isFree && (
-              <div>
-                <p className="font-semibold text-dark/40 uppercase text-xs tracking-wider mb-1">Pris</p>
-                <p className="text-dark">{event.isFree === 'true' ? 'Gratis' : 'Betalt'}</p>
-              </div>
-            )}
             {event.finalVenue && (
               <div>
                 <p className="font-semibold text-dark/40 uppercase text-xs tracking-wider mb-1">Sted</p>
                 <p className="text-dark">{event.finalVenue}</p>
+              </div>
+            )}
+            {event.finalStartTime && (
+              <div>
+                <p className="font-semibold text-dark/40 uppercase text-xs tracking-wider mb-1">Tid</p>
+                <p className="text-dark">
+                  kl. {event.finalStartTime}{event.finalEndTime ? `–${event.finalEndTime}` : ''}
+                </p>
+              </div>
+            )}
+            {event.isFree && (
+              <div>
+                <p className="font-semibold text-dark/40 uppercase text-xs tracking-wider mb-1">Pris</p>
+                <p className="text-dark">{event.isFree === 'true' ? 'Gratis' : 'Betalt'}</p>
               </div>
             )}
           </div>
