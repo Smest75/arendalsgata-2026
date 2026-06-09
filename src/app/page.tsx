@@ -7,9 +7,9 @@ import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
 
 const AKTORER = [
-  { name: 'Sagene bokhandel', type: 'Bokhandel & kultursted' },
+  { name: 'Mellomrommet', type: 'Galleri' },
   { name: 'Rivertz', type: 'Vinbar' },
-  { name: 'Mellomrommet', type: 'Galleri & lokale' },
+  { name: 'Sagene bokhandel', type: 'Bokhandel' }
 ]
 
 export default async function Home() {
@@ -38,7 +38,7 @@ export default async function Home() {
               10.–14. august · Sagene, Oslo
             </p>
             <p className="text-cream/80 text-base sm:text-lg max-w-2xl leading-relaxed mt-4 mb-10">
-              Når politikere, medier og påvirkere samles i Arendal, lager vi våre egne møteplasser i og rundt
+              Når politikere, medier og påvirkere samles i Arendal, lager vi som blir hjemme våre egne møteplasser i og rundt
               Arendalsgata. Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler —
               bygget nedenfra, med lokale aktører og ildsjeler.
             </p>
@@ -86,7 +86,7 @@ export default async function Home() {
           </div>
           <div className="bg-white border border-border rounded-sm p-8">
             <p className="font-display font-bold text-2xl text-green mb-2 leading-snug">
-              &ldquo;Laget i Arendalsgata. Åpent for alle.&rdquo;
+              «Laget på Sagene. Åpent for alle.» 
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
               <div>
