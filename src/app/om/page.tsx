@@ -21,7 +21,7 @@ export default function OmPage() {
           <h2 className="font-display font-bold text-2xl text-dark mb-4">Hva er Arendalsgata 2026?</h2>
           <div className="space-y-4 text-dark/80 leading-relaxed">
             <p>
-              Arendalsgata 2026 er en åpen festivaluke på Sagene — for folk og virksomheter som vil
+              Arendalsgata 2026 er en åpen festivaluke på Sagene – for folk og virksomheter som vil
               møtes rundt Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler.
             </p>
             <p>
@@ -50,7 +50,7 @@ export default function OmPage() {
             <div>
               <h3 className="font-semibold text-dark mb-2">Hvor?</h3>
               <p className="text-dark/70">
-                I og rundt Arendalsgata på Sagene, Oslo. Ulike arrangører, ulike lokaler — se
+                I og rundt Arendalsgata på Sagene, Oslo. Ulike arrangører, ulike lokaler – se
                 hvert enkelt arrangement for nøyaktig adresse.
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function OmPage() {
           </p>
           <p className="text-dark/70 leading-relaxed mb-4">
             Det startet med en selfie ved busstoppet da Arendalsuka åpnet i august 2025.
-            LinkedIn-posten tok av — og ideen begynte å ta form.
+            LinkedIn-posten tok av – og ideen begynte å ta form.
           </p>
           <p className="text-dark/70 mb-8">
             Kontakt:{' '}
