@@ -11,7 +11,10 @@ export async function updateEvent(formData: FormData) {
   if (!id) return
 
   const db = await getDb()
+  const title = (formData.get('title') as string)?.trim()
+
   await db.update(events).set({
+    ...(title ? { title } : {}),
     descriptionEdited: (formData.get('descriptionEdited') as string)?.trim() || null,
     finalDate: (formData.get('finalDate') as string)?.trim() || null,
     finalStartTime: (formData.get('finalStartTime') as string)?.trim() || null,

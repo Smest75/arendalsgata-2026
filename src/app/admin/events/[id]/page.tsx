@@ -48,6 +48,17 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
           <input type="hidden" name="id" value={event.id} />
 
           <div>
+            <label className={labelCls}>Tittel</label>
+            <input
+              type="text"
+              name="title"
+              defaultValue={event.title}
+              required
+              className={inputCls}
+            />
+          </div>
+
+          <div>
             <label className={labelCls}>Redigert beskrivelse <span className="text-dark/30">(erstatter opprinnelig)</span></label>
             <textarea
               name="descriptionEdited"
@@ -64,7 +75,10 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
               <input
                 type="date"
                 name="finalDate"
-                defaultValue={event.finalDate ?? ''}
+                defaultValue={event.finalDate ?? '2026-08-10'}
+                min="2026-08-10"
+                max="2026-08-14"
+                lang="nb"
                 className={inputCls}
               />
             </div>
