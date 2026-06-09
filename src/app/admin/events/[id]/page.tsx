@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { updateEvent } from './actions'
 import { SubmitButton } from '../../SubmitButton'
+import { ALL_CATEGORIES, categoryLabel } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -67,6 +68,24 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
               className={inputCls}
               placeholder="La stå tomt for å bruke opprinnelig beskrivelse"
             />
+          </div>
+
+          <div>
+            <label className={labelCls}>Kategorier</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
+              {ALL_CATEGORIES.map((cat) => (
+                <label key={cat} className="flex items-center gap-2 text-sm text-dark/70 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="categories"
+                    value={cat}
+                    defaultChecked={event.categories.includes(cat)}
+                    className="accent-green"
+                  />
+                  {categoryLabel(cat)}
+                </label>
+              ))}
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4">

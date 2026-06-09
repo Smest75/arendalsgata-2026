@@ -28,8 +28,8 @@ export default function OmPage() {
               faglige, kuraterte eller åpne for et større publikum.
             </p>
             <p>
-              Ideen er enkel: Mens store deler av samfunns-Norge drar til Arendal, lager vi vår
-              egen møteplass her. Landsbyen i byen.
+              Ideen er enkel: Mens store deler av samfunns-Norge drar til Arendal, lager vi som blir igjen våre
+              egne møteplasser her i landsbyen i byen.
             </p>
           </div>
         </section>
