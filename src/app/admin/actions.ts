@@ -52,3 +52,23 @@ export async function updateInterestStatus(id: number, status: string) {
   await db.update(interests).set({ status }).where(eq(interests.id, id))
   revalidatePath('/admin')
 }
+
+export async function deleteEvent(id: number) {
+  const db = await getDb()
+  await db.delete(events).where(eq(events.id, id))
+  revalidatePath('/admin')
+  revalidatePath('/program')
+  revalidatePath('/')
+}
+
+export async function deleteVenue(id: number) {
+  const db = await getDb()
+  await db.delete(venues).where(eq(venues.id, id))
+  revalidatePath('/admin')
+}
+
+export async function deleteInterest(id: number) {
+  const db = await getDb()
+  await db.delete(interests).where(eq(interests.id, id))
+  revalidatePath('/admin')
+}

@@ -5,6 +5,7 @@ import { events, venues, interests } from '@/db/schema'
 import { desc } from 'drizzle-orm'
 import { StatusSelect } from './StatusSelect'
 import { logout } from './actions'
+import { DeleteButton } from './DeleteButton'
 import Link from 'next/link'
 
 export const metadata = { title: 'Admin — Arendalsgata 2026' }
@@ -73,7 +74,7 @@ export default async function AdminPage() {
             {allEvents.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen arrangementer ennå.</p>
             ) : (
-              <Table cols={['Tittel', 'Arrangør', 'Dato', 'Sted', 'Innsendt', 'Status', '']}>
+              <Table cols={['Tittel', 'Arrangør', 'Dato', 'Sted', 'Innsendt', 'Status', '', '']}>
                 {allEvents.map((e) => (
                   <tr key={e.id} className="hover:bg-cream/40 transition-colors">
                     <td className="py-2 pr-4 font-medium text-dark max-w-[180px]">
@@ -92,13 +93,13 @@ export default async function AdminPage() {
                     <td className="py-2 pr-3">
                       <StatusSelect id={e.id} currentStatus={e.status} type="event" />
                     </td>
-                    <td className="py-2">
-                      <Link
-                        href={`/admin/events/${e.id}`}
-                        className="text-xs text-green hover:underline whitespace-nowrap"
-                      >
+                    <td className="py-2 pr-3">
+                      <Link href={`/admin/events/${e.id}`} className="text-xs text-green hover:underline whitespace-nowrap">
                         Rediger →
                       </Link>
+                    </td>
+                    <td className="py-2">
+                      <DeleteButton id={e.id} type="event" />
                     </td>
                   </tr>
                 ))}
@@ -117,7 +118,7 @@ export default async function AdminPage() {
             {allVenues.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen lokaler registrert ennå.</p>
             ) : (
-              <Table cols={['Navn', 'Adresse', 'Type', 'Kapasitet', 'Kontakt', 'Status', '']}>
+              <Table cols={['Navn', 'Adresse', 'Type', 'Kapasitet', 'Kontakt', 'Status', '', '']}>
                 {allVenues.map((v) => (
                   <tr key={v.id} className="hover:bg-cream/40 transition-colors">
                     <td className="py-2 pr-4 font-medium text-dark">{v.name}</td>
@@ -131,10 +132,13 @@ export default async function AdminPage() {
                     <td className="py-2 pr-3">
                       <StatusSelect id={v.id} currentStatus={v.status} type="venue" />
                     </td>
-                    <td className="py-2">
+                    <td className="py-2 pr-3">
                       <Link href={`/admin/venues/${v.id}`} className="text-xs text-green hover:underline whitespace-nowrap">
                         Rediger →
                       </Link>
+                    </td>
+                    <td className="py-2">
+                      <DeleteButton id={v.id} type="venue" />
                     </td>
                   </tr>
                 ))}
@@ -153,7 +157,7 @@ export default async function AdminPage() {
             {allInterests.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen interessemeldinger ennå.</p>
             ) : (
-              <Table cols={['Navn', 'E-post', 'Type', 'Interessert i', 'Melding', 'Status']}>
+              <Table cols={['Navn', 'E-post', 'Type', 'Interessert i', 'Melding', 'Status', '']}>
                 {allInterests.map((i) => (
                   <tr key={i.id} className="hover:bg-cream/40 transition-colors">
                     <td className="py-2 pr-4 font-medium text-dark">{i.name}</td>
@@ -167,8 +171,11 @@ export default async function AdminPage() {
                     <td className="py-2 pr-4 text-dark/60 text-xs max-w-[180px]">
                       <span className="block truncate" title={i.message ?? ''}>{i.message ?? '–'}</span>
                     </td>
-                    <td className="py-2">
+                    <td className="py-2 pr-3">
                       <StatusSelect id={i.id} currentStatus={i.status} type="interest" />
+                    </td>
+                    <td className="py-2">
+                      <DeleteButton id={i.id} type="interest" />
                     </td>
                   </tr>
                 ))}
