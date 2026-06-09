@@ -82,8 +82,8 @@ export default function OmPage() {
         <section className="bg-white border border-border rounded-sm p-8">
           <h2 className="font-display font-bold text-2xl text-dark mb-6">Hvem står bak?</h2>
           <p className="text-dark/70 leading-relaxed mb-4">
-            Arendalsgata 2026 er initiert av Martin Smestad Hansen, som bor et steinkast fra
-            Arendalsgata. Festivalen bygges i samarbeid med lokale aktører, ildsjeler og
+            Arendalsgata 2026 er initiert av Martin Smestad Hansen, som har bodd et steinkast fra
+            Arendalsgata i rundt 10 år. Festivalen bygges i samarbeid med lokale aktører, ildsjeler og
             arrangører.
           </p>
           <p className="text-dark/70 leading-relaxed mb-4">
@@ -95,6 +95,9 @@ export default function OmPage() {
             <a href="mailto:hei@arendalsgata.no" className="text-green font-medium hover:underline">
               hei@arendalsgata.no
             </a>
+          </p>
+          <p className="text-dark/70 leading-relaxed mb-4">
+             Linkedin 11. august 2025:
           </p>
           <iframe
             src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7360565443155193857"

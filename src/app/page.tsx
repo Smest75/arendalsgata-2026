@@ -163,7 +163,9 @@ export default async function Home() {
       <section className="bg-green text-cream px-4 sm:px-6 py-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-display font-bold text-3xl sm:text-4xl mb-4 leading-tight">
-            Har du en idé, et lokale<br />eller lyst til å bidra?
+            Har du en idé? Send den inn, gjerne uferdig.
+<br />Har du et lokale? Registrer det.
+<br />Vil du bare følge med? Meld interesse.
           </h2>
           <p className="text-cream/80 mb-10 max-w-xl leading-relaxed">
             Du trenger ikke ha alt klart. Send inn det du har, så tar vi kontakt.

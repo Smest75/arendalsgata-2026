@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const FROM = 'Arendalsgata 2026 <noreply@arendalsgata.no>'
+const FROM = 'Arendalsgata 2026 <noreply@contact.arendalsgata.no>'
 const TO = 'hei@arendalsgata.no'
 
 function getResend() {
