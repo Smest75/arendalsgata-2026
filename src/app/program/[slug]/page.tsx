@@ -28,7 +28,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               </span>
             )}
             {event.categories.map((cat) => (
-              <span key={cat} className="text-xs font-medium text-cream bg-rust/60 px-2 py-1 rounded-sm">
+              <span key={cat} className="text-xs font-medium text-cream/90 bg-white/15 px-2 py-1 rounded-sm">
                 {categoryLabel(cat)}
               </span>
             ))}
