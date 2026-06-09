@@ -117,7 +117,7 @@ export default async function AdminPage() {
             {allVenues.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen lokaler registrert ennå.</p>
             ) : (
-              <Table cols={['Navn', 'Adresse', 'Type', 'Kapasitet', 'Kontakt', 'Status']}>
+              <Table cols={['Navn', 'Adresse', 'Type', 'Kapasitet', 'Kontakt', 'Status', '']}>
                 {allVenues.map((v) => (
                   <tr key={v.id} className="hover:bg-cream/40 transition-colors">
                     <td className="py-2 pr-4 font-medium text-dark">{v.name}</td>
@@ -128,8 +128,13 @@ export default async function AdminPage() {
                       <p className="text-xs text-dark/70">{v.contactName}</p>
                       <a href={`mailto:${v.email}`} className="text-xs text-green hover:underline">{v.email}</a>
                     </td>
-                    <td className="py-2">
+                    <td className="py-2 pr-3">
                       <StatusSelect id={v.id} currentStatus={v.status} type="venue" />
+                    </td>
+                    <td className="py-2">
+                      <Link href={`/admin/venues/${v.id}`} className="text-xs text-green hover:underline whitespace-nowrap">
+                        Rediger →
+                      </Link>
                     </td>
                   </tr>
                 ))}
