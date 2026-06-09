@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 import Link from 'next/link'
 import { getDb } from '@/db'
@@ -10,7 +10,6 @@ const AKTORER = [
   { name: 'Sagene bokhandel', type: 'Bokhandel & kultursted' },
   { name: 'Rivertz', type: 'Vinbar' },
   { name: 'Mellomrommet', type: 'Galleri & lokale' },
-  { name: 'Gullsmeden', type: 'Butikk & fageksperter' },
 ]
 
 export default async function Home() {
@@ -39,8 +38,8 @@ export default async function Home() {
               10.–14. august · Sagene, Oslo
             </p>
             <p className="text-cream/80 text-base sm:text-lg max-w-2xl leading-relaxed mt-4 mb-10">
-              Når politikere, medier og påvirkere samles i Arendal, lager vi vår egen møteplass i
-              Arendalsgata. Fag, kultur, mat, teknologi, litteratur, musikk og gode samtaler —
+              Når politikere, medier og påvirkere samles i Arendal, lager vi våre egne møteplasser i og rundt
+              Arendalsgata. Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler —
               bygget nedenfra, med lokale aktører og ildsjeler.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -81,13 +80,13 @@ export default async function Home() {
             </p>
             <p className="text-dark/70 leading-relaxed">
               Det kan være en samtale i en bokhandel. En vinsmaking. En faglig frokost. En liten
-              konsert. En quizkveld. En utstilling. En workshop. Et foredrag. En middag. Eller noe
+              intimkonsert. En quizkveld. En utstilling. En workshop. Et foredrag. En middag. Eller noe
               vi ikke har tenkt på ennå.
             </p>
           </div>
           <div className="bg-white border border-border rounded-sm p-8">
             <p className="font-display font-bold text-2xl text-green mb-2 leading-snug">
-              &ldquo;Laget i Arendalsgata. Åpent for hele Oslo.&rdquo;
+              &ldquo;Laget i Arendalsgata. Åpent for alle.&rdquo;
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
               <div>

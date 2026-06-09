@@ -19,9 +19,8 @@ export default function OmPage() {
           <h2 className="font-display font-bold text-2xl text-dark mb-4">Hva er Arendalsgata 2026?</h2>
           <div className="space-y-4 text-dark/80 leading-relaxed">
             <p>
-              Arendalsgata 2026 er en åpen festivaluke på Sagene — for folk fra hele Oslo som vil
-              møtes rundt fag, kultur, mat, teknologi, samfunn, bærekraft, litteratur, musikk og
-              gode samtaler.
+              Arendalsgata 2026 er en åpen festivaluke på Sagene — for folk og virksomheter som vil
+              møtes rundt Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler.
             </p>
             <p>
               Festivalen skjer i og rundt Arendalsgata, hos lokale butikker, serveringssteder,
@@ -55,12 +54,12 @@ export default function OmPage() {
             </div>
 
             <div>
-              <h3 className="font-semibold text-dark mb-3">Kom deg hit</h3>
+              <h3 className="font-semibold text-dark mb-3">Transport</h3>
               <div className="grid sm:grid-cols-3 gap-4">
                 <div className="border border-border rounded-sm p-4">
                   <p className="font-semibold text-dark mb-1">🚌 Buss</p>
                   <p className="text-dark/60 text-sm">
-                    Busstoppet Arendalsgata. Ruter 54 fra Nydalen / Storo.
+                    Ta buss 20, 37, 54 eller FlybussenFB1 (!) til busstoppet Arendalsgata eller Sagene.
                   </p>
                 </div>
                 <div className="border border-border rounded-sm p-4">
@@ -72,7 +71,7 @@ export default function OmPage() {
                 <div className="border border-border rounded-sm p-4">
                   <p className="font-semibold text-dark mb-1">🚶 Gange</p>
                   <p className="text-dark/60 text-sm">
-                    Apostlenes hester fungerer fint fra mange deler av Oslo.
+                    Om du er i form til det, ta apostlenes hester fatt, eventuelt i kombinasjon med kollektivtransport. For eksempel kan du ta T-banen til Nydalen og gå ned langs Akerselva.
                   </p>
                 </div>
               </div>

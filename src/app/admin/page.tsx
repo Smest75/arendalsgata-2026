@@ -5,6 +5,7 @@ import { events, venues, interests } from '@/db/schema'
 import { desc } from 'drizzle-orm'
 import { StatusSelect } from './StatusSelect'
 import { logout } from './actions'
+import Link from 'next/link'
 
 export const metadata = { title: 'Admin — Arendalsgata 2026' }
 
@@ -15,7 +16,7 @@ function Table({ cols, children }: { cols: string[]; children: React.ReactNode }
         <thead>
           <tr className="border-b border-border">
             {cols.map((c) => (
-              <th key={c} className="text-left text-xs font-semibold text-dark/40 uppercase tracking-wider pb-2 pr-4">
+              <th key={c} className="text-left text-xs font-semibold text-dark/40 uppercase tracking-wider pb-2 pr-4 whitespace-nowrap">
                 {c}
               </th>
             ))}
@@ -72,26 +73,32 @@ export default async function AdminPage() {
             {allEvents.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen arrangementer ennå.</p>
             ) : (
-              <Table cols={['Tittel', 'Arrangør', 'E-post', 'Tidspunkt', 'Innsendt', 'Status']}>
+              <Table cols={['Tittel', 'Arrangør', 'Dato', 'Sted', 'Innsendt', 'Status', '']}>
                 {allEvents.map((e) => (
                   <tr key={e.id} className="hover:bg-cream/40 transition-colors">
-                    <td className="py-2 pr-4 font-medium text-dark max-w-[200px]">
+                    <td className="py-2 pr-4 font-medium text-dark max-w-[180px]">
                       <span className="block truncate" title={e.title}>{e.title}</span>
+                      <a href={`mailto:${e.email}`} className="text-xs text-dark/40 hover:text-green">{e.organizer}</a>
                     </td>
-                    <td className="py-2 pr-4 text-dark/70">{e.organizer}</td>
-                    <td className="py-2 pr-4">
-                      <a href={`mailto:${e.email}`} className="text-green hover:underline text-xs">
-                        {e.email}
-                      </a>
+                    <td className="py-2 pr-4 text-dark/60 text-xs whitespace-nowrap">
+                      {e.finalDate ?? <span className="text-dark/30 italic">ikke satt</span>}
                     </td>
                     <td className="py-2 pr-4 text-dark/60 text-xs max-w-[140px]">
-                      <span className="block truncate" title={e.preferredTime}>{e.preferredTime}</span>
+                      <span className="block truncate">{e.finalVenue ?? <span className="text-dark/30 italic">ikke satt</span>}</span>
                     </td>
                     <td className="py-2 pr-4 text-dark/40 text-xs whitespace-nowrap">
                       {new Date(e.createdAt).toLocaleDateString('no-NO')}
                     </td>
-                    <td className="py-2">
+                    <td className="py-2 pr-3">
                       <StatusSelect id={e.id} currentStatus={e.status} type="event" />
+                    </td>
+                    <td className="py-2">
+                      <Link
+                        href={`/admin/events/${e.id}`}
+                        className="text-xs text-green hover:underline whitespace-nowrap"
+                      >
+                        Rediger →
+                      </Link>
                     </td>
                   </tr>
                 ))}

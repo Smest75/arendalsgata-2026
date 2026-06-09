@@ -15,47 +15,53 @@ type Event = {
   registrationUrl: string | null
 }
 
-export default function EventCard({ event }: { event: Event }) {
+export default function EventCard({ event, activeCategory }: { event: Event; activeCategory?: string }) {
   const desc = event.descriptionEdited ?? event.description
-  const shortDesc = desc.length > 120 ? desc.slice(0, 120) + '...' : desc
+  const shortDesc = desc.length > 110 ? desc.slice(0, 110) + '...' : desc
+
+  const timeStr = event.finalStartTime
+    ? `kl. ${event.finalStartTime}${event.finalEndTime ? `–${event.finalEndTime}` : ''}`
+    : null
 
   return (
     <article className="bg-white border border-border rounded-sm p-5 flex flex-col gap-3 hover:border-green transition-colors">
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex flex-wrap gap-2">
-          {event.finalDate && (
-            <span className="text-xs font-semibold uppercase tracking-wider text-green bg-green/10 px-2 py-1 rounded-sm">
-              {formatDate(event.finalDate)}
-            </span>
-          )}
-          {event.categories.slice(0, 2).map((cat) => (
-            <span key={cat} className="text-xs font-medium text-rust bg-rust/10 px-2 py-1 rounded-sm">
-              {categoryLabel(cat)}
-            </span>
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-1.5">
+        {event.categories.slice(0, 2).map((cat) => (
+          <Link
+            key={cat}
+            href={`/program?kategori=${cat}`}
+            className={`text-xs font-medium px-2 py-0.5 rounded-sm transition-colors ${
+              activeCategory === cat
+                ? 'bg-green text-cream'
+                : 'bg-dark/8 text-dark/60 hover:bg-dark/12'
+            }`}
+          >
+            {categoryLabel(cat)}
+          </Link>
+        ))}
         {event.isFree === 'true' && (
-          <span className="text-xs text-green/70 font-medium shrink-0">Gratis</span>
+          <span className="text-xs font-medium px-2 py-0.5 rounded-sm bg-green/10 text-green ml-auto">
+            Gratis
+          </span>
         )}
       </div>
 
-      <h3 className="font-display font-bold text-xl text-dark leading-snug">
+      <h3 className="font-display font-bold text-lg text-dark leading-snug">
         {event.title}
       </h3>
 
-      {(event.finalVenue || event.finalStartTime) && (
-        <p className="text-sm text-dark/60">
-          {[event.finalVenue, event.finalStartTime && `kl. ${event.finalStartTime}`]
-            .filter(Boolean)
-            .join(' · ')}
-        </p>
+      {(event.finalVenue || timeStr) && (
+        <div className="flex flex-col gap-0.5 text-sm text-dark/60">
+          {event.finalVenue && <span>{event.finalVenue}</span>}
+          {timeStr && <span>{timeStr}</span>}
+        </div>
       )}
 
-      <p className="text-sm text-dark/70 leading-relaxed">{shortDesc}</p>
+      <p className="text-sm text-dark/70 leading-relaxed flex-1">{shortDesc}</p>
 
       <Link
         href={`/program/${event.slug}`}
-        className="text-sm font-semibold text-green hover:text-green-light transition-colors mt-auto"
+        className="text-sm font-semibold text-green hover:text-green-light transition-colors"
       >
         Les mer →
       </Link>

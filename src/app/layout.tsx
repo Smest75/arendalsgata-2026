@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, Inter } from 'next/font/google'
+import { Outfit, Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-const bricolage = Bricolage_Grotesque({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-bricolage',
+  variable: '--font-outfit',
 })
 
 const inter = Inter({
@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="no" className={`${bricolage.variable} ${inter.variable}`}>
+    <html lang="no" className={`${outfit.variable} ${inter.variable}`}>
       <body className="font-sans min-h-screen flex flex-col antialiased">
         <Nav />
         <main className="flex-1">{children}</main>

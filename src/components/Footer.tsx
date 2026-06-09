@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-cream/40">
-        Laget i Sagene. Åpent for hele Oslo.
+        Laget på Sagene. Åpent for alle.
       </div>
     </footer>
   )

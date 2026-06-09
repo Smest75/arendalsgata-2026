@@ -13,7 +13,7 @@ export default function Nav() {
           <span className="font-display font-bold text-lg tracking-widest uppercase">
             Arendalsgata
           </span>
-          <span className="font-display font-bold text-rust text-sm tracking-widest">
+          <span className="font-display font-bold text-cream/60 text-sm tracking-widest">
             2026
           </span>
         </Link>
