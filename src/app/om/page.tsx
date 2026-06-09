@@ -107,6 +107,7 @@ export default function OmPage() {
                 frameBorder="0"
                 allowFullScreen
                 title="LinkedIn-post som startet det hele"
+                loading="lazy"
                 className="max-w-full rounded-sm"
               />
             </div>
