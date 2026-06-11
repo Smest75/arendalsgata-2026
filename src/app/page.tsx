@@ -7,9 +7,12 @@ import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
 
 const AKTORER = [
+  { name: 'Circular Maker Studio', type: 'Butikk og makerspace' },
+  { name: 'Folkvang', type: 'Restaurant og selskapslokale' },
   { name: 'Mellomrommet', type: 'Galleri' },
   { name: 'Rivertz', type: 'Vinbar' },
-  { name: 'Sagene bokhandel', type: 'Bokhandel' }
+  { name: 'Sagene bokhandel', type: 'Bokhandel' },
+  { name: 'Sagene samfunnshus', type: 'Lokaler' }
 ]
 
 export default async function Home() {
