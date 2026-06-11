@@ -10,9 +10,11 @@ const AKTORER = [
   { name: 'Circular Maker Studio', type: 'Butikk og makerspace' },
   { name: 'Folkvang', type: 'Restaurant og selskapslokale' },
   { name: 'Mellomrommet', type: 'Galleri' },
+  { name: 'The Oslo Scoop', type: 'Guide to Oslo life & visibility adviser' },
   { name: 'Rivertz', type: 'Vinbar' },
   { name: 'Sagene bokhandel', type: 'Bokhandel' },
-  { name: 'Sagene samfunnshus', type: 'Lokaler' }
+  { name: 'Sagene Samfunnshus', type: 'Lokaler' },
+  { name: 'Smest AS', type: 'Primusmotor og teknologirådgiver' }
 ]
 
 export default async function Home() {
