@@ -10,6 +10,7 @@ const AKTORER = [
   { name: 'Circular Maker Studio', type: 'Butikk og makerspace' },
   { name: 'Folkvang', type: 'Restaurant og selskapslokale' },
   { name: 'Mellomrommet', type: 'Galleri' },
+  { name: 'Merkekraft', type: 'Bærekraftsrådgiver' },
   { name: 'Mysterud Bar', type: 'Nabolagsbar' },
   { name: 'The Oslo Scoop', type: 'Guide to Oslo life & visibility adviser' },
   { name: 'Rivertz', type: 'Vinbar' },
