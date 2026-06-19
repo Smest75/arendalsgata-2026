@@ -15,7 +15,8 @@ const AKTORER = [
   { name: 'Rivertz', type: 'Vinbar' },
   { name: 'Sagene bokhandel', type: 'Bokhandel' },
   { name: 'Sagene samfunnshus', type: 'Lokaler' },
-  { name: 'Smest AS', type: 'Primusmotor og teknologirådgiver' }
+  { name: 'Smest AS', type: 'Primusmotor og teknologirådgiver' },
+  { name: 'Winnem Utvikling', type: 'Karriererådgivning' }
 ]
 
 export default async function Home() {
