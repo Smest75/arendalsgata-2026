@@ -54,7 +54,17 @@ export default async function EventPage({ params }: Props) {
     ...(event.finalDate && event.finalEndTime && { endDate: `${event.finalDate}T${event.finalEndTime}:00` }),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    ...(event.isFree === 'true' && { isAccessibleForFree: true, offers: { '@type': 'Offer', price: 0, priceCurrency: 'NOK' } }),
+    ...(event.isFree === 'true' && {
+      isAccessibleForFree: true,
+      offers: {
+        '@type': 'Offer',
+        price: 0,
+        priceCurrency: 'NOK',
+        url: `https://arendalsgata.no/program/${event.slug}`,
+        availability: 'https://schema.org/InStock',
+        validFrom: event.createdAt ? new Date(event.createdAt).toISOString() : '2026-01-01T00:00:00',
+      },
+    }),
     ...(event.finalVenue && {
       location: {
         '@type': 'Place',
