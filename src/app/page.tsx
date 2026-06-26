@@ -47,7 +47,7 @@ export default async function Home() {
             </p>
             <p className="text-cream/80 text-base sm:text-lg max-w-2xl leading-relaxed mt-4 mb-10">
               Når politikere, medier og påvirkere samles i Arendal, lager vi som blir hjemme våre egne møteplasser i og rundt
-              Arendalsgata. Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler —
+              Arendalsgata. Fag, kultur, teknologi, samfunn, mat, drikke og gode samtaler –
               bygget nedenfra, med lokale aktører og ildsjeler.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
