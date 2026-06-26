@@ -42,7 +42,7 @@ export async function sendVenueNotification(data: {
       <h2>Nytt lokale registrert</h2>
       <p><strong>Sted:</strong> ${data.name}</p>
       <p><strong>Adresse:</strong> ${data.address}</p>
-      <p><strong>Kontakt:</strong> ${data.contactName} — ${data.email}</p>
+      <p><strong>Kontakt:</strong> ${data.contactName} – ${data.email}</p>
       <p><a href="https://arendalsgata.no/admin">Se i admin →</a></p>
     `,
   })

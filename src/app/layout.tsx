@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://arendalsgata.no'),
   title: {
     default: 'Arendalsgata 2026',
-    template: '%s — Arendalsgata 2026',
+    template: '%s – Arendalsgata 2026',
   },
   description: 'Festivalen for deg som blir igjen i Trygge Oslo. Fag, kultur, mat og gode samtaler i Arendalsgata på Sagene, Oslo. 10.–14. august 2026.',
   keywords: ['Arendalsgata', 'festival', 'Sagene', 'Oslo', 'Arendalsuka', 'kultur', 'arrangementer'],
@@ -50,7 +50,7 @@ const festivalSchema = {
   '@context': 'https://schema.org',
   '@type': 'Festival',
   name: 'Arendalsgata 2026',
-  description: 'En åpen festivaluke på Sagene, Oslo — for folk og virksomheter som vil møtes rundt fag, kultur, teknologi, mat, drikke og gode samtaler.',
+  description: 'En åpen festivaluke på Sagene, Oslo – for folk og virksomheter som vil møtes rundt fag, kultur, teknologi, mat, drikke og gode samtaler.',
   url: 'https://arendalsgata.no',
   startDate: '2026-08-10',
   endDate: '2026-08-14',

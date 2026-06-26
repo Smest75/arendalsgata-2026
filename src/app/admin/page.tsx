@@ -8,7 +8,7 @@ import { logout } from './actions'
 import { DeleteButton } from './DeleteButton'
 import Link from 'next/link'
 
-export const metadata = { title: 'Admin — Arendalsgata 2026' }
+export const metadata = { title: 'Admin – Arendalsgata 2026' }
 
 function Table({ cols, children }: { cols: string[]; children: React.ReactNode }) {
   return (
