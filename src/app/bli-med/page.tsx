@@ -1,4 +1,4 @@
-import { EventForm, VenueForm, InterestForm } from './forms'
+import { EventForm, VenueForm, InterestForm, OfferForm } from './forms'
 
 export const metadata = {
   title: 'Bli med',
@@ -52,6 +52,14 @@ export default function BliMedPage() {
           sub="For butikker, serveringssteder, gallerier, bakgårder og møterom"
         >
           <VenueForm />
+        </Section>
+
+        <Section
+          id="tilbud"
+          title="Tilby noe spesielt"
+          sub="For deg som har en butikk, et serveringssted eller en annen virksomhet og vil gjøre noe ekstra i festivalperioden"
+        >
+          <OfferForm />
         </Section>
 
         <Section

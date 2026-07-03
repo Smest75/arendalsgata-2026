@@ -48,6 +48,25 @@ export async function sendVenueNotification(data: {
   })
 }
 
+export async function sendOfferNotification(data: {
+  businessName: string
+  email: string
+  offerTypes: string[]
+}) {
+  await getResend().emails.send({
+    from: FROM,
+    to: TO,
+    subject: `Nytt tilbud fra ${data.businessName}`,
+    html: `
+      <h2>Ny virksomhet vil tilby noe spesielt</h2>
+      <p><strong>Virksomhet:</strong> ${data.businessName}</p>
+      <p><strong>Type tilbud:</strong> ${data.offerTypes.join(', ')}</p>
+      <p><strong>E-post:</strong> ${data.email}</p>
+      <p><a href="https://arendalsgata.no/admin">Se i admin →</a></p>
+    `,
+  })
+}
+
 export async function sendInterestNotification(data: {
   name: string
   email: string

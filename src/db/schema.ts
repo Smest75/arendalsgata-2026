@@ -43,6 +43,25 @@ export const venues = pgTable('venues', {
   createdAt: timestamp().defaultNow().notNull(),
 })
 
+export const offers = pgTable('offers', {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  businessName: text().notNull(),
+  address: text().notNull(),
+  businessType: text().notNull(),
+  contactName: text().notNull(),
+  email: text().notNull(),
+  phone: text(),
+  offerTypes: text().array().notNull().default([]),
+  description: text().notNull(),
+  days: text().array().notNull().default([]),
+  openingHours: text(),
+  website: text(),
+  canPublish: text().notNull(),
+  status: text().notNull().default('new'),
+  internalNotes: text(),
+  createdAt: timestamp().defaultNow().notNull(),
+})
+
 export const interests = pgTable('interests', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: text().notNull(),

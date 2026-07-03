@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getDb } from '@/db'
-import { events, venues, interests } from '@/db/schema'
+import { events, venues, interests, offers } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
@@ -70,5 +70,17 @@ export async function deleteVenue(id: number) {
 export async function deleteInterest(id: number) {
   const db = await getDb()
   await db.delete(interests).where(eq(interests.id, id))
+  revalidatePath('/admin')
+}
+
+export async function updateOfferStatus(id: number, status: string) {
+  const db = await getDb()
+  await db.update(offers).set({ status }).where(eq(offers.id, id))
+  revalidatePath('/admin')
+}
+
+export async function deleteOffer(id: number) {
+  const db = await getDb()
+  await db.delete(offers).where(eq(offers.id, id))
   revalidatePath('/admin')
 }

@@ -1,9 +1,9 @@
 'use client'
 
 import { useTransition } from 'react'
-import { deleteEvent, deleteVenue, deleteInterest } from './actions'
+import { deleteEvent, deleteVenue, deleteInterest, deleteOffer } from './actions'
 
-type Type = 'event' | 'venue' | 'interest'
+type Type = 'event' | 'venue' | 'interest' | 'offer'
 
 export function DeleteButton({ id, type }: { id: number; type: Type }) {
   const [isPending, startTransition] = useTransition()
@@ -13,7 +13,8 @@ export function DeleteButton({ id, type }: { id: number; type: Type }) {
     startTransition(() => {
       if (type === 'event') deleteEvent(id)
       else if (type === 'venue') deleteVenue(id)
-      else deleteInterest(id)
+      else if (type === 'interest') deleteInterest(id)
+      else deleteOffer(id)
     })
   }
 

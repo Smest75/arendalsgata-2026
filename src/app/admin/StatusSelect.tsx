@@ -1,7 +1,7 @@
 'use client'
 
 import { useTransition } from 'react'
-import { updateEventStatus, updateVenueStatus, updateInterestStatus } from './actions'
+import { updateEventStatus, updateVenueStatus, updateInterestStatus, updateOfferStatus } from './actions'
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'Ny', color: 'bg-blue-100 text-blue-700' },
@@ -17,7 +17,7 @@ const SIMPLE_STATUS = [
   { value: 'done', label: 'Ferdig', color: 'bg-green/20 text-green' },
 ]
 
-type Type = 'event' | 'venue' | 'interest'
+type Type = 'event' | 'venue' | 'interest' | 'offer'
 
 export function StatusSelect({ id, currentStatus, type }: { id: number; currentStatus: string; type: Type }) {
   const [isPending, startTransition] = useTransition()
@@ -35,7 +35,8 @@ export function StatusSelect({ id, currentStatus, type }: { id: number; currentS
           startTransition(() => {
             if (type === 'event') updateEventStatus(id, status)
             else if (type === 'venue') updateVenueStatus(id, status)
-            else updateInterestStatus(id, status)
+            else if (type === 'interest') updateInterestStatus(id, status)
+            else updateOfferStatus(id, status)
           })
         }}
         className={`text-xs font-semibold px-2 py-1 rounded-sm border-0 cursor-pointer disabled:opacity-60 ${current.color}`}

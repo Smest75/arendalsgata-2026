@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { getDb } from '@/db'
-import { events, venues, interests } from '@/db/schema'
+import { events, venues, interests, offers } from '@/db/schema'
 import { desc } from 'drizzle-orm'
 import { StatusSelect } from './StatusSelect'
 import { logout } from './actions'
@@ -31,10 +31,11 @@ function Table({ cols, children }: { cols: string[]; children: React.ReactNode }
 
 export default async function AdminPage() {
   const db = await getDb()
-  const [allEvents, allVenues, allInterests] = await Promise.all([
+  const [allEvents, allVenues, allInterests, allOffers] = await Promise.all([
     db.select().from(events).orderBy(desc(events.createdAt)),
     db.select().from(venues).orderBy(desc(venues.createdAt)),
     db.select().from(interests).orderBy(desc(interests.createdAt)),
+    db.select().from(offers).orderBy(desc(offers.createdAt)),
   ])
 
   const newCount = allEvents.filter((e) => e.status === 'new').length
@@ -147,6 +148,55 @@ export default async function AdminPage() {
           </div>
         </section>
 
+        {/* Offers */}
+        <section>
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="font-display font-bold text-xl text-dark">Tilbud fra virksomheter</h2>
+            <span className="text-sm text-dark/40">{allOffers.length} totalt</span>
+          </div>
+          <div className="bg-white border border-border rounded-sm p-6">
+            {allOffers.length === 0 ? (
+              <p className="text-dark/40 text-sm">Ingen tilbud registrert ennå.</p>
+            ) : (
+              <Table cols={['Virksomhet', 'Type', 'Tilbud', 'Dager', 'Kontakt', 'Status', '', '']}>
+                {allOffers.map((o) => (
+                  <tr key={o.id} className="hover:bg-cream/40 transition-colors">
+                    <td className="py-2 pr-4 font-medium text-dark">
+                      <span className="block">{o.businessName}</span>
+                      <span className="text-xs text-dark/40">{o.address}</span>
+                    </td>
+                    <td className="py-2 pr-4 text-dark/60 text-xs">{o.businessType}</td>
+                    <td className="py-2 pr-4 text-dark/60 text-xs max-w-[200px]">
+                      <span className="block truncate" title={o.description}>{o.description}</span>
+                      {o.offerTypes.length > 0 && (
+                        <span className="text-dark/40">{o.offerTypes.join(', ')}</span>
+                      )}
+                    </td>
+                    <td className="py-2 pr-4 text-dark/60 text-xs whitespace-nowrap">
+                      {o.days.length > 0 ? o.days.join(', ') : '–'}
+                    </td>
+                    <td className="py-2 pr-4">
+                      <p className="text-xs text-dark/70">{o.contactName}</p>
+                      <a href={`mailto:${o.email}`} className="text-xs text-green hover:underline">{o.email}</a>
+                    </td>
+                    <td className="py-2 pr-3">
+                      <StatusSelect id={o.id} currentStatus={o.status} type="offer" />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <Link href={`/admin/offers/${o.id}`} className="text-xs text-green hover:underline whitespace-nowrap">
+                        Rediger →
+                      </Link>
+                    </td>
+                    <td className="py-2">
+                      <DeleteButton id={o.id} type="offer" />
+                    </td>
+                  </tr>
+                ))}
+              </Table>
+            )}
+          </div>
+        </section>
+
         {/* Interests */}
         <section>
           <div className="flex items-center gap-3 mb-4">
@@ -157,7 +207,7 @@ export default async function AdminPage() {
             {allInterests.length === 0 ? (
               <p className="text-dark/40 text-sm">Ingen interessemeldinger ennå.</p>
             ) : (
-              <Table cols={['Navn', 'E-post', 'Type', 'Interessert i', 'Melding', 'Status', '']}>
+              <Table cols={['Navn', 'E-post', 'Type', 'Interessert i', 'Melding', 'Status', '', '']}>
                 {allInterests.map((i) => (
                   <tr key={i.id} className="hover:bg-cream/40 transition-colors">
                     <td className="py-2 pr-4 font-medium text-dark">{i.name}</td>
@@ -173,6 +223,11 @@ export default async function AdminPage() {
                     </td>
                     <td className="py-2 pr-3">
                       <StatusSelect id={i.id} currentStatus={i.status} type="interest" />
+                    </td>
+                    <td className="py-2 pr-3">
+                      <Link href={`/admin/interests/${i.id}`} className="text-xs text-green hover:underline whitespace-nowrap">
+                        Rediger →
+                      </Link>
                     </td>
                     <td className="py-2">
                       <DeleteButton id={i.id} type="interest" />
