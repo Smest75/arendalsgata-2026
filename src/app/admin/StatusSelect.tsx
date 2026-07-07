@@ -17,11 +17,18 @@ const SIMPLE_STATUS = [
   { value: 'done', label: 'Ferdig', color: 'bg-green/20 text-green' },
 ]
 
+const OFFER_STATUS = [
+  { value: 'new', label: 'Ny', color: 'bg-blue-100 text-blue-700' },
+  { value: 'contacted', label: 'Kontaktet', color: 'bg-yellow-100 text-yellow-700' },
+  { value: 'publisert', label: 'Publisert', color: 'bg-green text-cream' },
+  { value: 'done', label: 'Ferdig', color: 'bg-green/20 text-green' },
+]
+
 type Type = 'event' | 'venue' | 'interest' | 'offer'
 
 export function StatusSelect({ id, currentStatus, type }: { id: number; currentStatus: string; type: Type }) {
   const [isPending, startTransition] = useTransition()
-  const options = type === 'event' ? STATUS_OPTIONS : SIMPLE_STATUS
+  const options = type === 'event' ? STATUS_OPTIONS : type === 'offer' ? OFFER_STATUS : SIMPLE_STATUS
 
   const current = options.find((o) => o.value === currentStatus) ?? options[0]
 

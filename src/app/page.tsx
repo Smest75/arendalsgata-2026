@@ -2,9 +2,25 @@ export const revalidate = 60
 
 import Link from 'next/link'
 import { getDb } from '@/db'
-import { events } from '@/db/schema'
+import { events, offers } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import EventCard from '@/components/EventCard'
+
+const BUSINESS_TYPE_LABELS: Record<string, string> = {
+  butikk: 'Butikk',
+  serveringssted: 'Serveringssted / kafé / bar',
+  galleri: 'Galleri / kultursted',
+  service: 'Tjenester / service',
+  annet: 'Annet',
+}
+
+const DAY_LABELS: Record<string, string> = {
+  mon: 'Man 10.',
+  tue: 'Tir 11.',
+  wed: 'Ons 12.',
+  thu: 'Tor 13.',
+  fri: 'Fre 14.',
+}
 
 const AKTORER = [
   { name: 'Circular Maker Studio', type: 'Butikk og makerspace' },
@@ -22,12 +38,10 @@ const AKTORER = [
 
 export default async function Home() {
   const db = await getDb()
-  const publishedEvents = await db
-    .select()
-    .from(events)
-    .where(eq(events.status, 'published'))
-    .orderBy(events.finalDate)
-    .limit(6)
+  const [publishedEvents, publishedOffers] = await Promise.all([
+    db.select().from(events).where(eq(events.status, 'published')).orderBy(events.finalDate).limit(6),
+    db.select().from(offers).where(eq(offers.status, 'publisert')),
+  ])
 
   return (
     <>
@@ -166,6 +180,35 @@ export default async function Home() {
           )}
         </div>
       </section>
+
+      {/* I og rundt Arendalsgata */}
+      {publishedOffers.length > 0 && (
+        <section className="bg-white border-b border-border px-4 sm:px-6 py-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <h2 className="font-display font-bold text-2xl text-dark">I og rundt Arendalsgata</h2>
+                <p className="text-dark/60 text-sm mt-1">Lokale virksomheter som gjør noe ekstra i festivaluka</p>
+              </div>
+              <Link href="/tilbud" className="text-sm font-medium text-green hover:underline">
+                Se alle →
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {publishedOffers.slice(0, 6).map((offer) => (
+                <div key={offer.id} className="border border-border rounded-sm p-5 bg-cream">
+                  <p className="font-display font-semibold text-dark text-lg leading-tight">{offer.businessName}</p>
+                  <p className="text-dark/50 text-xs mt-0.5 mb-3">{BUSINESS_TYPE_LABELS[offer.businessType] ?? offer.businessType}</p>
+                  <p className="text-dark/70 text-sm leading-relaxed line-clamp-3">{offer.description}</p>
+                  {offer.days.length > 0 && (
+                    <p className="text-dark/40 text-xs mt-3">{offer.days.map((d) => DAY_LABELS[d] ?? d).join(' · ')}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Bli med CTA */}
       <section className="bg-green text-cream px-4 sm:px-6 py-16">
