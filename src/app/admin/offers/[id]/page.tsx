@@ -11,21 +11,30 @@ export const dynamic = 'force-dynamic'
 const inputCls = 'w-full border border-border rounded-sm px-3 py-2 text-dark bg-cream focus:outline-none focus:border-green text-sm'
 const labelCls = 'block text-sm font-medium text-dark/60 mb-1'
 
-const BUSINESS_TYPE_LABELS: Record<string, string> = {
-  butikk: 'Butikk',
-  serveringssted: 'Serveringssted / kafé / bar',
-  galleri: 'Galleri / kultursted',
-  service: 'Tjenester / service',
-  annet: 'Annet',
-}
+const BUSINESS_TYPES = [
+  { value: 'butikk', label: 'Butikk' },
+  { value: 'serveringssted', label: 'Serveringssted / kafé / bar' },
+  { value: 'galleri', label: 'Galleri / kultursted' },
+  { value: 'service', label: 'Tjenester / service' },
+  { value: 'annet', label: 'Annet' },
+]
 
-const DAY_LABELS: Record<string, string> = {
-  mon: 'Mandag 10.',
-  tue: 'Tirsdag 11.',
-  wed: 'Onsdag 12.',
-  thu: 'Torsdag 13.',
-  fri: 'Fredag 14.',
-}
+const OFFER_TYPES = [
+  { value: 'aktivitet', label: 'Aktivitet' },
+  { value: 'produkt', label: 'Spesielt produkt' },
+  { value: 'tilbud', label: 'Tilbud / rabatt' },
+  { value: 'smaksopplevelse', label: 'Smaksopplevelse' },
+  { value: 'utstilling', label: 'Utstilling' },
+  { value: 'annet', label: 'Annet' },
+]
+
+const DAYS = [
+  { value: 'mon', label: 'Mandag 10.' },
+  { value: 'tue', label: 'Tirsdag 11.' },
+  { value: 'wed', label: 'Onsdag 12.' },
+  { value: 'thu', label: 'Torsdag 13.' },
+  { value: 'fri', label: 'Fredag 14.' },
+]
 
 export default async function EditOfferPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -40,95 +49,127 @@ export default async function EditOfferPage({ params }: { params: Promise<{ id: 
           <Link href="/admin" className="text-cream/50 text-sm hover:text-cream transition-colors">
             ← Admin
           </Link>
-          <h1 className="font-display font-bold text-xl mt-1">Tilbud fra virksomhet</h1>
+          <h1 className="font-display font-bold text-xl mt-1">Rediger tilbud fra virksomhet</h1>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-        <div className="bg-white border border-border rounded-sm p-6 space-y-4">
-          <h2 className="text-sm font-semibold text-dark/40 uppercase tracking-wider">Innsendt informasjon</h2>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <p className={labelCls}>Virksomhet</p>
-              <p className="text-sm font-medium text-dark">{offer.businessName}</p>
-              <p className="text-xs text-dark/50 mt-0.5">{offer.address}</p>
-            </div>
-            <div>
-              <p className={labelCls}>Type</p>
-              <p className="text-sm text-dark">{BUSINESS_TYPE_LABELS[offer.businessType] ?? offer.businessType}</p>
-            </div>
-          </div>
-
-          <div>
-            <p className={labelCls}>Hva de vil tilby</p>
-            <p className="text-sm text-dark/80 whitespace-pre-wrap">{offer.description}</p>
-          </div>
-
-          {offer.offerTypes.length > 0 && (
-            <div>
-              <p className={labelCls}>Type tilbud</p>
-              <div className="flex flex-wrap gap-1.5 mt-1">
-                {offer.offerTypes.map((t) => (
-                  <span key={t} className="text-xs bg-cream border border-border rounded-sm px-2 py-0.5 text-dark/70">{t}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {offer.days.length > 0 && (
-            <div>
-              <p className={labelCls}>Dager</p>
-              <p className="text-sm text-dark/70">
-                {offer.days.map((d) => DAY_LABELS[d] ?? d).join(', ')}
-              </p>
-            </div>
-          )}
-
-          {offer.openingHours && (
-            <div>
-              <p className={labelCls}>Åpningstid</p>
-              <p className="text-sm text-dark/70">{offer.openingHours}</p>
-            </div>
-          )}
-
-          {offer.website && (
-            <div>
-              <p className={labelCls}>Nettside / Instagram</p>
-              <p className="text-sm text-dark/70">{offer.website}</p>
-            </div>
-          )}
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <p className={labelCls}>Kontakt</p>
-              <p className="text-sm text-dark/70">{offer.contactName}</p>
-              <a href={`mailto:${offer.email}`} className="text-sm text-green hover:underline">{offer.email}</a>
-              {offer.phone && <p className="text-xs text-dark/50 mt-0.5">{offer.phone}</p>}
-            </div>
-            <div>
-              <p className={labelCls}>Kan publiseres</p>
-              <p className="text-sm text-dark/70">
-                {offer.canPublish === 'yes' ? 'Ja' : offer.canPublish === 'contact_first' ? 'Ta kontakt først' : 'Ikke ennå'}
-              </p>
-            </div>
-          </div>
-
-          <p className="text-xs text-dark/30">
-            Innsendt {new Date(offer.createdAt).toLocaleDateString('no-NO', {
-              day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
-            })}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+        <div className="bg-white border border-border rounded-sm p-4 mb-6">
+          <p className="text-sm text-dark/50">
+            Innsendt av {offer.contactName} · <a href={`mailto:${offer.email}`} className="text-green hover:underline">{offer.email}</a>
+            {offer.phone && <span> · {offer.phone}</span>}
+          </p>
+          <p className="text-xs text-dark/30 mt-1">
+            {new Date(offer.createdAt).toLocaleDateString('no-NO', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
           </p>
         </div>
 
         <form action={updateOffer} className="bg-white border border-border rounded-sm p-6 space-y-5">
           <input type="hidden" name="id" value={offer.id} />
 
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelCls}>Virksomhetsnavn</label>
+              <input type="text" name="businessName" defaultValue={offer.businessName} required className={inputCls} />
+            </div>
+            <div>
+              <label className={labelCls}>Adresse</label>
+              <input type="text" name="address" defaultValue={offer.address} required className={inputCls} />
+            </div>
+          </div>
+
           <div>
+            <label className={labelCls}>Type virksomhet</label>
+            <select name="businessType" defaultValue={offer.businessType} className={inputCls}>
+              {BUSINESS_TYPES.map((t) => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className={labelCls}>Beskrivelse av hva de tilbyr</label>
+            <textarea name="description" rows={4} defaultValue={offer.description} required className={inputCls} />
+          </div>
+
+          <div>
+            <label className={labelCls}>Type tilbud</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
+              {OFFER_TYPES.map((t) => (
+                <label key={t.value} className="flex items-center gap-2 text-sm text-dark/70 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="offerTypes"
+                    value={t.value}
+                    defaultChecked={offer.offerTypes.includes(t.value)}
+                    className="accent-green"
+                  />
+                  {t.label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className={labelCls}>Dager</label>
+            <div className="flex flex-wrap gap-4 mt-1">
+              {DAYS.map((d) => (
+                <label key={d.value} className="flex items-center gap-2 text-sm text-dark/70 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="days"
+                    value={d.value}
+                    defaultChecked={offer.days.includes(d.value)}
+                    className="accent-green"
+                  />
+                  {d.label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelCls}>Åpningstid</label>
+              <input type="text" name="openingHours" defaultValue={offer.openingHours ?? ''} className={inputCls} placeholder="F.eks. 10–18" />
+            </div>
+            <div>
+              <label className={labelCls}>Nettside / Instagram</label>
+              <input type="text" name="website" defaultValue={offer.website ?? ''} className={inputCls} placeholder="https://..." />
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 border-t border-border pt-5">
+            <div>
+              <label className={labelCls}>Kontaktperson</label>
+              <input type="text" name="contactName" defaultValue={offer.contactName} required className={inputCls} />
+            </div>
+            <div>
+              <label className={labelCls}>E-post</label>
+              <input type="email" name="email" defaultValue={offer.email} required className={inputCls} />
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelCls}>Telefon</label>
+              <input type="text" name="phone" defaultValue={offer.phone ?? ''} className={inputCls} />
+            </div>
+            <div>
+              <label className={labelCls}>Kan publiseres</label>
+              <select name="canPublish" defaultValue={offer.canPublish} className={inputCls}>
+                <option value="yes">Ja</option>
+                <option value="contact_first">Ta kontakt først</option>
+                <option value="no">Ikke ennå</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-5">
             <label className={labelCls}>Interne notater</label>
             <textarea
               name="internalNotes"
-              rows={4}
+              rows={3}
               defaultValue={offer.internalNotes ?? ''}
               className={inputCls}
               placeholder="Vises ikke offentlig"
