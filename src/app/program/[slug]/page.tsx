@@ -3,7 +3,7 @@ import { events } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { categoryLabel, formatDate } from '@/lib/utils'
+import { categoryLabel, formatDate, formatTime, formatPrice } from '@/lib/utils'
 import type { Metadata } from 'next'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -44,6 +44,8 @@ export default async function EventPage({ params }: Props) {
 
   const desc = event.descriptionEdited ?? event.description
 
+  const offerPrice = event.isFree === 'true' ? 0 : event.isFree === 'false' ? event.finalPrice : null
+
   const eventSchema = {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -54,11 +56,11 @@ export default async function EventPage({ params }: Props) {
     ...(event.finalDate && event.finalEndTime && { endDate: `${event.finalDate}T${event.finalEndTime}:00` }),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    ...(event.isFree === 'true' && {
-      isAccessibleForFree: true,
+    ...(event.isFree === 'true' && { isAccessibleForFree: true }),
+    ...(offerPrice != null && {
       offers: {
         '@type': 'Offer',
-        price: 0,
+        price: offerPrice,
         priceCurrency: 'NOK',
         url: `https://arendalsgata.no/program/${event.slug}`,
         availability: 'https://schema.org/InStock',
@@ -106,7 +108,7 @@ export default async function EventPage({ params }: Props) {
           </h1>
           {(event.finalVenue || event.finalStartTime) && (
             <p className="text-cream/80 mt-4 text-lg">
-              {[event.finalVenue, event.finalStartTime && `kl. ${event.finalStartTime}${event.finalEndTime ? `–${event.finalEndTime}` : ''}`]
+              {[event.finalVenue, event.finalStartTime && `kl. ${formatTime(event.finalStartTime)}${event.finalEndTime ? `–${formatTime(event.finalEndTime)}` : ''}`]
                 .filter(Boolean)
                 .join(' · ')}
             </p>
@@ -133,14 +135,18 @@ export default async function EventPage({ params }: Props) {
               <div>
                 <p className="font-semibold text-dark/50 uppercase text-xs tracking-wider mb-1">Tid</p>
                 <p className="text-dark">
-                  kl. {event.finalStartTime}{event.finalEndTime ? `–${event.finalEndTime}` : ''}
+                  kl. {formatTime(event.finalStartTime)}{event.finalEndTime ? `–${formatTime(event.finalEndTime)}` : ''}
                 </p>
               </div>
             )}
             {event.isFree && (
               <div>
                 <p className="font-semibold text-dark/50 uppercase text-xs tracking-wider mb-1">Pris</p>
-                <p className="text-dark">{event.isFree === 'true' ? 'Gratis' : 'Betalt'}</p>
+                <p className="text-dark">
+                  {event.isFree === 'true'
+                    ? 'Gratis'
+                    : (event.finalPrice != null ? formatPrice(event.finalPrice) : '<kommer>')}
+                </p>
               </div>
             )}
           </div>

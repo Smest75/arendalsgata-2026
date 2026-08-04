@@ -119,7 +119,7 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
             />
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-3 gap-4">
             <div>
               <label className={labelCls}>Pris</label>
               <select name="isFree" defaultValue={event.isFree ?? ''} className={inputCls}>
@@ -127,6 +127,20 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
                 <option value="true">Gratis</option>
                 <option value="false">Betalt</option>
               </select>
+            </div>
+            <div>
+              <label className={labelCls}>
+                Beløp <span className="text-dark/30">(kr, uten desimaler)</span>
+              </label>
+              <input
+                type="number"
+                name="finalPrice"
+                min="0"
+                step="1"
+                defaultValue={event.finalPrice ?? ''}
+                className={inputCls}
+                placeholder="F.eks. 250"
+              />
             </div>
             <div>
               <label className={labelCls}>Påmeldingslenke</label>

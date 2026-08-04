@@ -13,6 +13,8 @@ export async function updateEvent(formData: FormData) {
   const db = await getDb()
   const title = (formData.get('title') as string)?.trim()
   const categories = formData.getAll('categories') as string[]
+  const finalPriceRaw = (formData.get('finalPrice') as string)?.trim()
+  const finalPrice = finalPriceRaw ? Number(finalPriceRaw) : null
 
   await db.update(events).set({
     ...(title ? { title } : {}),
@@ -23,6 +25,7 @@ export async function updateEvent(formData: FormData) {
     finalEndTime: (formData.get('finalEndTime') as string)?.trim() || null,
     finalVenue: (formData.get('finalVenue') as string)?.trim() || null,
     isFree: (formData.get('isFree') as string) || null,
+    finalPrice: Number.isFinite(finalPrice) ? finalPrice : null,
     registrationUrl: (formData.get('registrationUrl') as string)?.trim() || null,
     internalNotes: (formData.get('internalNotes') as string)?.trim() || null,
   }).where(eq(events.id, id))

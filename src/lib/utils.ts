@@ -30,6 +30,14 @@ export function formatDateFull(dateStr: string): string {
   return `${DAYS[d.getDay()]} ${d.getDate()}. ${MONTHS_LONG[d.getMonth()]}`
 }
 
+export function formatTime(timeStr: string): string {
+  return timeStr.replace(':', '.')
+}
+
+export function formatPrice(price: number): string {
+  return `${price} kr`
+}
+
 export function categoryLabel(cat: string): string {
   const labels: Record<string, string> = {
     fag: 'Fag & foredrag',

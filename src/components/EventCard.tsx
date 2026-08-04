@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { categoryLabel, formatDate } from '@/lib/utils'
+import { categoryLabel, formatDate, formatTime, formatPrice } from '@/lib/utils'
 
 type Event = {
   slug: string
@@ -12,6 +12,7 @@ type Event = {
   descriptionEdited: string | null
   description: string
   isFree: string | null
+  finalPrice: number | null
   registrationUrl: string | null
 }
 
@@ -20,7 +21,7 @@ export default function EventCard({ event, activeCategory }: { event: Event; act
   const shortDesc = desc.length > 110 ? desc.slice(0, 110) + '...' : desc
 
   const timeStr = event.finalStartTime
-    ? `kl. ${event.finalStartTime}${event.finalEndTime ? `–${event.finalEndTime}` : ''}`
+    ? `kl. ${formatTime(event.finalStartTime)}${event.finalEndTime ? `–${formatTime(event.finalEndTime)}` : ''}`
     : null
 
   return (
@@ -42,6 +43,11 @@ export default function EventCard({ event, activeCategory }: { event: Event; act
         {event.isFree === 'true' && (
           <span className="text-xs font-medium px-2 py-0.5 rounded-sm bg-green/10 text-green ml-auto">
             Gratis
+          </span>
+        )}
+        {event.isFree === 'false' && (
+          <span className="text-xs font-medium px-2 py-0.5 rounded-sm bg-rust/10 text-rust ml-auto">
+            {event.finalPrice != null ? formatPrice(event.finalPrice) : 'Pris: <kommer>'}
           </span>
         )}
       </div>

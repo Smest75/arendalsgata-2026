@@ -21,6 +21,7 @@ export const events = pgTable('events', {
   finalEndTime: text(),
   finalVenue: text(),
   isFree: text(),
+  finalPrice: integer(),
   registrationUrl: text(),
   internalNotes: text(),
   createdAt: timestamp().defaultNow().notNull(),
