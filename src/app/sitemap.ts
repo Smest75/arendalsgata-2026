@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://arendalsgata.no/program', lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
     { url: 'https://arendalsgata.no/bli-med', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://arendalsgata.no/om', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
+    { url: 'https://arendalsgata.no/personvern', lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
     ...eventUrls,
   ]
 }

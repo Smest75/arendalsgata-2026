@@ -22,8 +22,9 @@ export default function Footer() {
           <Link href="/om#praktisk" className="hover:text-cream transition-colors">Praktisk info</Link>
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs text-cream/40">
-        Laget på Sagene. Åpent for alle.
+      <div className="border-t border-white/10 py-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center text-xs text-cream/40">
+        <span>Laget på Sagene. Åpent for alle.</span>
+        <Link href="/personvern" className="hover:text-cream/70 transition-colors">Personvern</Link>
       </div>
     </footer>
   )
