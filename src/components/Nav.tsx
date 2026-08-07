@@ -21,6 +21,7 @@ export default function Nav() {
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-8 text-sm font-medium">
           <Link href="/program" className="hover:text-rust transition-colors">Program</Link>
+          <Link href="/tilbud" className="hover:text-rust transition-colors">Lokale tilbud</Link>
           <Link href="/bli-med" className="hover:text-rust transition-colors">Bli med</Link>
           <Link href="/om" className="hover:text-rust transition-colors">Om festivalen</Link>
           <Link
@@ -47,6 +48,7 @@ export default function Nav() {
       {open && (
         <div className="sm:hidden border-t border-green-light px-4 py-4 flex flex-col gap-4 text-sm font-medium">
           <Link href="/program" onClick={() => setOpen(false)}>Program</Link>
+          <Link href="/tilbud" onClick={() => setOpen(false)}>Lokale tilbud</Link>
           <Link href="/bli-med" onClick={() => setOpen(false)}>Bli med</Link>
           <Link href="/om" onClick={() => setOpen(false)}>Om festivalen</Link>
           <Link
