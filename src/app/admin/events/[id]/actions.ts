@@ -12,12 +12,14 @@ export async function updateEvent(formData: FormData) {
 
   const db = await getDb()
   const title = (formData.get('title') as string)?.trim()
+  const organizer = (formData.get('organizer') as string)?.trim()
   const categories = formData.getAll('categories') as string[]
   const finalPriceRaw = (formData.get('finalPrice') as string)?.trim()
   const finalPrice = finalPriceRaw ? Number(finalPriceRaw) : null
 
   await db.update(events).set({
     ...(title ? { title } : {}),
+    ...(organizer ? { organizer } : {}),
     categories,
     descriptionEdited: (formData.get('descriptionEdited') as string)?.trim() || null,
     finalDate: (formData.get('finalDate') as string)?.trim() || null,

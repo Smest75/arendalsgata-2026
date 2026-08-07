@@ -58,6 +58,11 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
           </div>
 
           <div>
+            <label className={labelCls}>Arrangør</label>
+            <input type="text" name="organizer" defaultValue={event.organizer} required className={inputCls} />
+          </div>
+
+          <div>
             <label className={labelCls}>
               Redigert beskrivelse <span className="text-dark/30">(erstatter opprinnelig ved publisering)</span>
             </label>
